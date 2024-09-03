@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josiah - Personal Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #backgroundCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .header {
+            background-color: transparent;
+            padding: 20px;
+        }
+
+        .header img {
+            width: 100px;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+
+        .intro {
+            margin: 50px auto;
+            max-width: 600px;
+        }
+
+        .social-media {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column; /* Stack title and buttons vertically */
+            align-items: center; /* Center items horizontally */
+        }
+
+        .social-media h3 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center; /* Center buttons horizontally */
+        }
+
+        .social-buttons a {
+            text-decoration: none;
+            margin: 0 10px;
+            display: inline-block; /* Ensure the outline is visible around the images */
+            border-radius: 50%; /* Circle outline */
+            overflow: hidden; /* Ensure the border-radius clips the image */
+            position: relative; /* Positioning context for outline */
+        }
+
+        .social-buttons a img {
+            width: 40px; /* Consistent size for all logos */
+            height: 40px;
+            vertical-align: middle;
+            filter: grayscale(100%); /* Black and white for all logos */
+            border: 4px solid white; /* White circle outline */
+            border-radius: 50%; /* Circle outline */
+            object-fit: cover; /* Maintain aspect ratio of the logo */
+        }
+
+        .social-buttons a img.github-logo {
+            background-color: white; /* White background for GitHub logo */
+        }
+
+        .social-buttons a img.sigma-logo {
+            filter: none; /* No black-and-white filter for Sigma Games logo */
+            background-color: transparent; /* Transparent background for Sigma Games logo */
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: transparent;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="backgroundCanvas"></canvas>
+
+    <header class="header">
+        <img src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Josiah's Logo">
+        <h1>Josiah</h1>
+    </header>
+
+    <section class="intro">
+        <h2>About Me</h2>
+        <p>Hello, I'm Josiah. I have a burning passion for learning how to code and playing video games such as: Portal, Minecraft, and others alike. My favorite food is Chicken Alfredo, and my favorite color is sky blue. I also develop for a website that acts as an unblocked games website for school. Find the link for it down below in the Connections page.</p>
+    </section>
+
+    <section class="social-media">
+        <h3>Connections</h3>
+        <div class="social-buttons">
+            <a href="https://github.com/yourprofile" target="_blank">
+                <img class="github-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+            </a>
+            <a href="https://steamcommunity.com/profiles/76561199171872881/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+            </a>
+            <a href="https://www.sigmagames21.site" target="_blank">
+                <img class="sigma-logo" src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Sigma Games">
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Josiah. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const dots = [];
+        const numDots = 100;
+        const maxConnections = 5;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        function Dot() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.5; // Reduced speed
+            this.vy = (Math.random() - 0.5) * 0.5; // Reduced speed
+            this.connections = [];
+        }
+
+        Dot.prototype.update = function() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x > width || this.x < 0) this.vx *= -1;
+            if (this.y > height || this.y < 0) this.vy *= -1;
+
+            this.connections = [];
+        }
+
+        Dot.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+        }
+
+        function connectDots() {
+            for (let i = 0; i < dots.length; i++) {
+                let dot1 = dots[i];
+                for (let j = i + 1; j < dots.length; j++) {
+                    let dot2 = dots[j];
+                    const dist = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
+                    const opacity = Math.max(0.1, 1 - (dist / 100)); // Fading effect based on distance
+                    if (dist < 100 && dot1.connections.length < maxConnections) {
+                        ctx.beginPath();
+                        ctx.moveTo(dot1.x, dot1.y);
+                        ctx.lineTo(dot2.x, dot2.y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`; // Adjust opacity based on distance
+                        ctx.lineWidth = 1; // Thinner lines
+                        ctx.stroke();
+
+                        dot1.connections.push(dot2);
+                        dot2.connections.push(dot1);
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].update();
+                dots[i].draw();
+            }
+
+            connectDots();
+
+            requestAnimationFrame(animate);
+        }
+
+        function init() {
+            for (let i = 0; i < numDots; i++) {
+                dots.push(new Dot());
+            }
+            animate();
+        }
+
+        init();
+    </script>
+
+</body>
+</html>
