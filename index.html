@@ -12,7 +12,7 @@
             background-color: black;
             color: #fff;
             text-align: center;
-            overflow: hidden;
+            /* Removed overflow: hidden; to allow scrolling */
         }
 
         #backgroundCanvas {
@@ -53,8 +53,8 @@
         .social-media {
             margin: 20px auto;
             display: flex;
-            flex-direction: column; /* Stack title and buttons vertically */
-            align-items: center; /* Center items horizontally */
+            flex-direction: column;
+            align-items: center;
         }
 
         .social-media h3 {
@@ -64,40 +64,40 @@
 
         .social-buttons {
             display: flex;
-            justify-content: center; /* Center buttons horizontally */
+            justify-content: center;
         }
 
         .social-buttons a {
             text-decoration: none;
             margin: 0 10px;
-            display: inline-block; /* Ensure the outline is visible around the images */
-            border-radius: 50%; /* Circle outline */
-            overflow: hidden; /* Ensure the border-radius clips the image */
-            position: relative; /* Positioning context for outline */
-            transition: transform 0.3s; /* Smooth scale on hover */
+            display: inline-block;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s;
         }
 
         .social-buttons a img {
-            width: 40px; /* Consistent size for all logos */
+            width: 40px;
             height: 40px;
             vertical-align: middle;
-            filter: grayscale(100%); /* Black and white for all logos */
-            border: 4px solid white; /* White circle outline */
-            border-radius: 50%; /* Circle outline */
-            object-fit: cover; /* Maintain aspect ratio of the logo */
+            filter: grayscale(100%);
+            border: 4px solid white;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .social-buttons a img.github-logo {
-            background-color: white; /* White background for GitHub logo */
+            background-color: white;
         }
 
         .social-buttons a img.sigma-logo {
-            filter: none; /* No black-and-white filter for Sigma Games logo */
-            background-color: transparent; /* Transparent background for Sigma Games logo */
+            filter: none;
+            background-color: transparent;
         }
 
         .social-buttons a:hover {
-            transform: scale(1.1); /* Enlarge icons on hover */
+            transform: scale(1.1);
         }
 
         .portfolio-button {
@@ -115,7 +115,7 @@
         .portfolio-button:hover {
             background-color: black;
             color: white;
-            transform: scale(1.1); /* Slight enlargement on hover */
+            transform: scale(1.1);
         }
 
         .portfolio {
@@ -173,7 +173,7 @@
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        let height = canvas.height = document.body.scrollHeight; // Adjusted to make the canvas height match the page height
 
         const dots = [];
         const numDots = 100;
@@ -181,7 +181,7 @@
 
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            height = canvas.height = document.body.scrollHeight; // Adjust canvas height on window resize
         }
 
         window.addEventListener('resize', resizeCanvas);
@@ -189,8 +189,8 @@
         function Dot() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5; // Reduced speed
-            this.vy = (Math.random() - 0.5) * 0.5; // Reduced speed
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
             this.connections = [];
         }
 
@@ -217,13 +217,13 @@
                 for (let j = i + 1; j < dots.length; j++) {
                     let dot2 = dots[j];
                     const dist = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
-                    const opacity = Math.max(0.1, 1 - (dist / 100)); // Fading effect based on distance
+                    const opacity = Math.max(0.1, 1 - (dist / 100));
                     if (dist < 100 && dot1.connections.length < maxConnections) {
                         ctx.beginPath();
                         ctx.moveTo(dot1.x, dot1.y);
                         ctx.lineTo(dot2.x, dot2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`; // Adjust opacity based on distance
-                        ctx.lineWidth = 1; // Thinner lines
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.lineWidth = 1;
                         ctx.stroke();
 
                         dot1.connections.push(dot2);
