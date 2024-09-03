@@ -12,6 +12,16 @@
             background-color: black;
             color: #fff;
             text-align: center;
+            overflow: hidden;
+        }
+
+        #backgroundCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
         header {
@@ -92,6 +102,8 @@
 </head>
 <body>
 
+    <canvas id="backgroundCanvas"></canvas>
+
     <header>
         <img src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Josiah's Logo">
         <h1>Josiah G.</h1>
@@ -121,7 +133,7 @@
     <footer>
         <a href="index.html" class="back-button">Back to Home</a>
     </footer>
-    
+
     <script>
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
