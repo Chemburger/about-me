@@ -53,8 +53,8 @@
         .social-media {
             margin: 20px auto;
             display: flex;
-            flex-direction: column; /* Stack title and buttons vertically */
-            align-items: center; /* Center items horizontally */
+            flex-direction: column;
+            align-items: center;
         }
 
         .social-media h3 {
@@ -64,40 +64,61 @@
 
         .social-buttons {
             display: flex;
-            justify-content: center; /* Center buttons horizontally */
+            justify-content: center;
         }
 
         .social-buttons a {
             text-decoration: none;
             margin: 0 10px;
-            display: inline-block; /* Ensure the outline is visible around the images */
-            border-radius: 50%; /* Circle outline */
-            overflow: hidden; /* Ensure the border-radius clips the image */
-            position: relative; /* Positioning context for outline */
+            display: inline-block;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .social-buttons a:hover {
+            transform: scale(1.2);
         }
 
         .social-buttons a img {
-            width: 40px; /* Consistent size for all logos */
+            width: 40px;
             height: 40px;
             vertical-align: middle;
-            filter: grayscale(100%); /* Black and white for all logos */
-            border: 4px solid white; /* White circle outline */
-            border-radius: 50%; /* Circle outline */
-            object-fit: cover; /* Maintain aspect ratio of the logo */
-            transition: transform 0.3s ease; /* Smooth transition for hover effect */
-        }
-
-        .social-buttons a img:hover {
-            transform: scale(1.2); /* Enlarge the image on hover */
+            filter: grayscale(100%);
+            border: 4px solid white;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .social-buttons a img.github-logo {
-            background-color: white; /* White background for GitHub logo */
+            background-color: white;
         }
 
         .social-buttons a img.sigma-logo {
-            filter: none; /* No black-and-white filter for Sigma Games logo */
-            background-color: transparent; /* Transparent background for Sigma Games logo */
+            filter: none;
+            background-color: transparent;
+        }
+
+        .my-stuff {
+            margin-top: 40px;
+        }
+
+        .my-stuff a {
+            text-decoration: none;
+            color: black;
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .my-stuff a:hover {
+            transform: scale(1.1);
+            background-color: #ddd;
         }
 
         footer {
@@ -136,6 +157,10 @@
                 <img class="sigma-logo" src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Sigma Games">
             </a>
         </div>
+    </section>
+
+    <section class="my-stuff">
+        <a href="portfolio.html" target="_blank">Portfolio</a>
     </section>
 
     <footer>
