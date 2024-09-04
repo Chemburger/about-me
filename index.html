@@ -12,8 +12,7 @@
             background-color: black;
             color: #fff;
             text-align: center;
-            overflow-x: hidden;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
         #backgroundCanvas {
@@ -75,6 +74,11 @@
             border-radius: 50%;
             overflow: hidden;
             position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .social-buttons a:hover {
+            transform: scale(1.2);
         }
 
         .social-buttons a img {
@@ -101,8 +105,8 @@
             background-color: transparent;
         }
 
-        .portfolio-section {
-            margin-top: 50px;
+        .my-stuff {
+            margin-top: 40px;
         }
 
         .portfolio-button {
@@ -114,11 +118,15 @@
             font-size: 18px;
             border: 2px solid white;
             border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s, transform 0.3s ease;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
-        .portfolio-button:hover {
+        .my-stuff a:hover {
             transform: scale(1.1);
+            background-color: #ddd;
         }
 
         footer {
@@ -172,7 +180,7 @@
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        let height = canvas.height = document.body.scrollHeight; // Adjusted to make the canvas height match the page height
 
         const dots = [];
         const numDots = 100;
@@ -184,7 +192,7 @@
 
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            height = canvas.height = document.body.scrollHeight; // Adjust canvas height on window resize
         }
 
         window.addEventListener('resize', resizeCanvas);
