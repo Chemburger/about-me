@@ -77,6 +77,16 @@
             border-radius: 8px;
         }
 
+        .ays-embed {
+            margin: 20px auto;
+            max-width: 1000px;
+            height: 600px; /* Adjust height as needed */
+            border: 1px solid #fff;
+            border-radius: 8px;
+            background-color: #333;
+            text-align: left;
+        }
+
         footer {
             margin-top: 50px;
             padding: 20px;
@@ -129,99 +139,16 @@
             <p>Description of the third project. Highlight key aspects of the project and its impact or results.</p>
         </div>
 
-        <!-- Add more projects as needed -->
+        <!-- Embed the A.Y.S. application -->
+        <div class="ays-embed">
+            <iframe src="data:text/html;base64,<!DOCTYPE html%3E<html%20lang=%22en%22%3E<head>%20<meta%20charset=%22UTF-8%22%3E<meta%20name=%22viewport%22%20content=%22width=device-width,%20initial-scale=1.0%22%3E<title>A.Y.S.%20-%20OpenAI%20GPT-3.5%20Turbo</title><style>body%20{%20font-family:%20%27Helvetica%20Neue%27,%20Arial,%20sans-serif;%20background-color:%20#f5f5f5;%20margin:%200;%20padding:%200;%20display:%20flex;%20align-items:%20center;%20justify-content:%20center;%20min-height:%20100vh;%20overflow:%20auto;%20color:%20#333;}%20.container%20{%20display:%20flex;%20flex-direction:%20column;%20align-items:%20center;%20justify-content:%20flex-start;%20background-color:%20#ffffff;%20border-radius:%2010px;%20box-shadow:%200%204px%2012px%20rgba(0,%200,%200,%200.1);%20width:%2090%;%20max-width:%201000px;%20padding:%2020px;%20margin:%2020px;%20box-sizing:%20border-box;}%20.header-container%20{%20text-align:%20center;%20margin-bottom:%2020px;%20width:%20100%;}%20.header-title%20{%20font-size:%2032px;%20font-weight:%20600;%20margin:%200;}%20.header-logo%20{%20height:%2060px;%20margin-top:%2010px;}%20p%20{%20font-size:%2014px;%20color:%20#555;%20margin:%2010px%200%2020px;%20text-align:%20center;}%20.textarea-container%20{%20display:%20flex;%20flex-direction:%20column;%20align-items:%20center;%20margin-bottom:%2020px;%20width:%20100%;}textarea%20{%20width:%20100%;%20height:%20100px;%20padding:%2015px;%20border:%201px%20solid%20#ddd;%20border-radius:%208px;%20font-size:%2014px;%20box-sizing:%20border-box;%20resize:%20none;%20margin-bottom:%2010px;}%20.buttons%20{%20display:%20flex;%20gap:%2010px;%20justify-content:%20center;%20margin-bottom:%2020px;}%20button%20{%20padding:%2012px%2024px;%20font-size:%2016px;%20background-color:%20#1a73e8;%20color:%20white;%20border:%20none;%20border-radius:%208px;%20cursor:%20pointer;%20transition:%20background-color%200.3s%20ease;}%20button:hover%20{%20background-color:%20#1669c1;}%20.response-container%20{%20flex-grow:%201;%20width:%20100%;%20text-align:%20left;%20overflow:%20auto;}%20.response%20{%20background-color:%20#f9f9f9;%20padding:%2015px;%20border:%201px%20solid%20#ddd;%20border-radius:%208px;%20font-size:%2014px;%20max-height:%20400px;%20overflow:%20auto;%20white-space:%20pre-wrap;}%20.copy-button%20{%20display:%20none;%20margin-top:%2010px;%20padding:%2010px;%20font-size:%2014px;%20background-color:%20#1a73e8;%20color:%20white;%20border:%20none;%20border-radius:%208px;%20cursor:%20pointer;%20transition:%20background-color%200.3s%20ease;}%20.copy-button:hover%20{%20background-color:%20#1669c1;}</style></head><body><div%20class=%22container%22><div%20class=%22header-container%22><h1%20class=%22header-title%22>A.Y.S.%20-%20At%20Your%20Service</h1><img%20src=%22https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png%22%20alt=%22Sigma%20Logo%22%20class=%22header-logo%22></div><p>The%20Sigma%20Games%2021%20team%20is%20not%20responsible%20for%20any%20form%20of%20punishment%20that%20comes%20from%20using%20A.Y.S.%20for%20malicious%20purposes.</p><div%20class=%22textarea-container%22><textarea%20id=%22prompt%22%20placeholder=%22Type%20your%20prompt%20here...%22></textarea></div><div%20class=%22buttons%22><button%20onclick=%22getGPT3Response()%22>Submit</button></div><div%20id=%22response-container%22%20class=%22response-container%22><div%20id=%22response%22%20class=%22response%22></div><button%20id=%22copy-button%22%20class=%22copy-button%22%20onclick=%22copyResponse()%22>Copy%20Code</button></div></div><script>const%20inappropriateKeywords%20=%20[%27violence%27,%20%27explicit%27,%20%27nudity%27,%20%27gore%27,%20%27sex%27,%20%27porn%27,%20%27racism%27];let%20conversationHistory%20=%20[];function%20containsInappropriateContent(text)%20{%20return%20inappropriateKeywords.some(keyword%20=>%20text.toLowerCase().includes(keyword));}function%20isEssayOrParagraph(text)%20{%20const%20sentences%20=%20text.split(%27.%20%27);%20return%20sentences.length%20>%203%20&&%20!text.includes(%27```%27);}async%20function%20getGPT3Response()%20{%20const%20prompt%20=%20document.getElementById(%27prompt%27).value;%20const%20apiKey%20=%20%27sk-proj-VEY4G8RcXOYuxqaCICiYT3BlbkFJZgrL9DanM3R2tsn8v9jd%27;%20const%20responseElement%20=%20document.getElementById(%27response%27);%20const%20responseContainer%20=%20document.getElementById(%27response-container%27);%20const%20copyButton%20=%20document.getElementById(%27copy-button%27);if%20(containsInappropriateContent(prompt))%20{%20responseElement.innerText%20=%20%27Error:%20The%20prompt%20contains%20inappropriate%20content%20and%20cannot%20be%20processed.%27;%20return;}conversationHistory.push({%20role:%20%27user%27,%20content:%20prompt%20});const%20headers%20=%20{%20%27Content-Type%27:%20%27application/json%27,%20%27Authorization%27:%20`Bearer%20${apiKey}`%20};const%20systemMessages%20=%20[{%20role:%20%27system%27,%20content:%20%27You%20are%20A.Y.S.%20(At%20Your%20Service),%20an%20assistant%20created%20by%20Sigma%20Games%2021.%20You%20help%20users%20by%20providing%20information%20and%20answering%20questions.%27%20},{%20role:%20%27system%27,%20content:%20%27Always%20be%20polite,%20helpful,%20and%20provide%20accurate%20information%20to%20the%20best%20of%20your%20ability.%27%20},{%20role:%20%27system%27,%20content:%20%27You%20must%20never%20respond%20with%20any%20essays%20by%20request%20of%20the%20user.%20If%20the%20user%20does%20request%20any%20form%20of%20essay%20or%20writing,%20you%20must%20respond%20with:%20%22My%20programming%20prevents%20me%20from%20providing%20any%20form%20of%20essay%20or%20requested%20writing%20at%20all%20ever%20no%20writing%20paragraphs,%20if%20you%20seek%20aid%20try%20asking%20a%20teacher.%22%20},{%20role:%20%27system%27,%20content:%20%27Never%20respond%20with%20vulgar%20language%20or%20slurs%20of%20any%20kind.%20If%20the%20user%20mentions%20any%20explicit%20or%20vulgar%20language,%20you%20will%20shame%20them%20for%20using%20such%20words.%20All%20vulgar%20and%20explicit%20language%20will%20be%20filled%20with%20#.%27%20},{%20role:%20%27system%27,%20content:%20%27Solving%20math%20problems%20is%20strictly%20prohibited.%20Under%20no%20circumstances%20will%20you%20reply%20with%20answers%20from%20math%20problems%20that%20the%20user%20requests.%27%20},{%20role:%20%27system%27,%20content:%20%27Reply%20with%20%22womp%20womp%22%20to%20anything%20sad%20that%20the%20user%20inputs.%27%20}];const%20body%20=%20JSON.stringify({%20model:%20%27gpt-3.5-turbo%27,%20messages:%20[%20...systemMessages,%20...conversationHistory%20],%20max_tokens:%20350});responseElement.innerText%20=%20%27Thinking...%27;try%20{%20const%20response%20=%20await%20fetch(%27https://api.openai.com/v1/chat/completions%27,%20{%20method:%20%27POST%27,%20headers:%20headers,%20body:%20body%20});const%20data%20=%20await%20response.json();if%20(data.choices%20&&%20data.choices.length%20>%200)%20{%20const%20responseText%20=%20data.choices[0].message.content;if%20(containsInappropriateContent(responseText))%20{%20responseElement.innerText%20=%20%27Error:%20The%20response%20contains%20inappropriate%20content%20and%20cannot%20be%20displayed.%27;}%20else%20if%20(isEssayOrParagraph(responseText))%20{%20responseElement.innerText%20=%20%27My%20programming%20prevents%20me%20from%20providing%20any%20form%20of%20essay%20or%20requested%20writing%20at%20all%20ever%20no%20writing%20paragraphs,%20if%20you%20seek%20aid%20try%20asking%20a%20teacher.%27;}%20else%20{%20responseElement.innerHTML%20=%20%27%27;%20typeText(responseText,%20responseElement);conversationHistory.push({%20role:%20%27assistant%27,%20content:%20responseText});if%20(responseText.includes(%27```%27))%20{%20copyButton.style.display%20=%20%27block%27;}%20else%20{%20copyButton.style.display%20=%20%27none%27;}}%20}else%20{%20responseElement.innerText%20=%20%27Error:%20No%20response%20from%20the%20server.%27;}%20}catch%20(error)%20{%20console.error(%27Error%20fetching%20GPT-3%20response:%27,%20error);responseElement.innerText%20=%20%27Error:%20An%20error%20occurred%20while%20fetching%20the%20response.%27;}}function%20typeText(text,%20element)%20{%20let%20index%20=%200;%20const%20interval%20=%20setInterval(()%20=>%20{%20if%20(index%20<%20text.length)%20{%20element.innerHTML%20+=%20text[index++];}else%20{%20clearInterval(interval);}}%20,%2030);}%20function%20copyResponse()%20{%20const%20responseText%20=%20document.getElementById(%27response%27).innerText;%20navigator.clipboard.writeText(responseText).then(()%20=>%20{%20alert(%27Response%20copied%20to%20clipboard%27);}).catch(err%20=>%20{%20console.error(%27Error%20copying%20response:%27,%20err);});}</script></body></html>"></iframe>
+        </div>
+
     </div>
 
     <footer>
         <a href="index.html" class="back-button">Back to Home</a>
     </footer>
-
-    <script>
-        const canvas = document.getElementById('backgroundCanvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        const dots = [];
-        const numDots = 100;
-        const maxConnections = 5;
-
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-
-        function Dot() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.connections = [];
-        }
-
-        Dot.prototype.update = function() {
-            this.x += this.vx;
-            this.y += this.vy;
-
-            if (this.x > width || this.x < 0) this.vx *= -1;
-            if (this.y > height || this.y < 0) this.vy *= -1;
-
-            this.connections = [];
-        }
-
-        Dot.prototype.draw = function() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
-            ctx.fillStyle = 'white';
-            ctx.fill();
-        }
-
-        function connectDots() {
-            for (let i = 0; i < dots.length; i++) {
-                let dot1 = dots[i];
-                for (let j = i + 1; j < dots.length; j++) {
-                    let dot2 = dots[j];
-                    const dist = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
-                    const opacity = Math.max(0.1, 1 - (dist / 100));
-                    if (dist < 100 && dot1.connections.length < maxConnections) {
-                        ctx.beginPath();
-                        ctx.moveTo(dot1.x, dot1.y);
-                        ctx.lineTo(dot2.x, dot2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-
-                        dot1.connections.push(dot2);
-                        dot2.connections.push(dot1);
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].update();
-                dots[i].draw();
-            }
-
-            connectDots();
-
-            requestAnimationFrame(animate);
-        }
-
-        function init() {
-            for (let i = 0; i < numDots; i++) {
-                dots.push(new Dot());
-            }
-            animate();
-        }
-
-        init();
-    </script>
 
 </body>
 </html>
