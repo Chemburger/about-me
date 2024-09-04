@@ -12,8 +12,7 @@
             background-color: black;
             color: #fff;
             text-align: center;
-            overflow-x: hidden;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
         #backgroundCanvas {
@@ -92,13 +91,12 @@
             font-size: 18px;
             border: 2px solid white;
             border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s, transform 0.3s ease;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .back-button:hover {
             background-color: black;
             color: white;
-            transform: scale(1.1);
         }
     </style>
 </head>
@@ -128,6 +126,8 @@
             <h3>Project Title 3</h3>
             <p>Description of the third project. Highlight key aspects of the project and its impact or results.</p>
         </div>
+
+        <!-- Add more projects as needed -->
     </div>
 
     <footer>
@@ -143,14 +143,6 @@
         const dots = [];
         const numDots = 100;
         const maxConnections = 5;
-        const maxSpeed = 2.5; // Reduced speed by 50%
-        const accelerationFactor = 0.1; // Reduced acceleration by 50%
-        const repulsionRadius = 150; // Only dots within this radius are repelled
-        const decelerationTime = 2000; // Time in milliseconds before dots decelerate
-        const decelerationFactor = 0.98; // Rate at which dots decelerate
-
-        let cursorX = width / 2;
-        let cursorY = height / 2;
 
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
@@ -159,47 +151,15 @@
 
         window.addEventListener('resize', resizeCanvas);
 
-        canvas.addEventListener('mousemove', (event) => {
-            const rect = canvas.getBoundingClientRect();
-            cursorX = event.clientX - rect.left;
-            cursorY = event.clientY - rect.top;
-        });
-
         function Dot() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
+            this.vx = (Math.random() - 0.5) * 0.5; // Reduced speed
+            this.vy = (Math.random() - 0.5) * 0.5; // Reduced speed
             this.connections = [];
-            this.repulsionTimeout = null;
         }
 
         Dot.prototype.update = function() {
-            const dx = this.x - cursorX;
-            const dy = this.y - cursorY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < repulsionRadius) {
-                const angle = Math.atan2(dy, dx);
-                const force = (repulsionRadius - dist) / repulsionRadius * accelerationFactor;
-                this.vx += force * Math.cos(angle);
-                this.vy += force * Math.sin(angle);
-
-                // Limit the speed to maxSpeed
-                const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-                if (speed > maxSpeed) {
-                    this.vx = (this.vx / speed) * maxSpeed;
-                    this.vy = (this.vy / speed) * maxSpeed;
-                }
-
-                // Set a timeout to decelerate after 2 seconds
-                clearTimeout(this.repulsionTimeout);
-                this.repulsionTimeout = setTimeout(() => {
-                    this.vx *= decelerationFactor;
-                    this.vy *= decelerationFactor;
-                }, decelerationTime);
-            }
-
             this.x += this.vx;
             this.y += this.vy;
 
@@ -222,13 +182,13 @@
                 for (let j = i + 1; j < dots.length; j++) {
                     let dot2 = dots[j];
                     const dist = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
-                    const opacity = Math.max(0.1, 1 - (dist / 100));
+                    const opacity = Math.max(0.1, 1 - (dist / 100)); // Fading effect based on distance
                     if (dist < 100 && dot1.connections.length < maxConnections) {
                         ctx.beginPath();
                         ctx.moveTo(dot1.x, dot1.y);
                         ctx.lineTo(dot2.x, dot2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`; // Adjust opacity based on distance
+                        ctx.lineWidth = 1; // Thinner lines
                         ctx.stroke();
 
                         dot1.connections.push(dot2);
