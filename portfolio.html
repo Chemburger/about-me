@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josiah G - Portfolio</title>
+    <title>Josiah G - Personal Website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,8 +12,8 @@
             background-color: black;
             color: #fff;
             text-align: center;
-            overflow-x: hidden;
-            overflow-y: auto;
+            overflow: hidden;
+            height: 100vh; /* Ensure full height for scrolling */
         }
 
         #backgroundCanvas {
@@ -45,42 +45,55 @@
             font-size: 18px;
         }
 
-        .content {
-            padding: 20px;
+        .intro {
+            margin: 50px auto;
+            max-width: 600px;
         }
 
-        .project {
+        .social-media {
             margin: 20px auto;
-            max-width: 800px;
-            padding: 10px;
-            border: 1px solid #fff;
-            border-radius: 8px;
-            background-color: #333;
-            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .project h3 {
-            margin: 0;
+        .social-media h3 {
+            margin: 0 0 10px 0;
             font-size: 24px;
         }
 
-        .project p {
-            font-size: 16px;
-            margin: 10px 0;
+        .social-buttons {
+            display: flex;
+            justify-content: center;
         }
 
-        iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-            border-radius: 8px;
+        .social-buttons a {
+            text-decoration: none;
+            margin: 0 10px;
+            display: inline-block;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
         }
 
-        footer {
-            margin-top: 50px;
-            padding: 20px;
+        .social-buttons a img {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+            filter: grayscale(100%);
+            border: 4px solid white;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+
+        .social-buttons a img.github-logo {
+            background-color: white;
+        }
+
+        .social-buttons a img.sigma-logo {
+            filter: none;
             background-color: transparent;
-            color: #fff;
         }
 
         .back-button {
@@ -109,26 +122,32 @@
     <header>
         <img src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Josiah's Logo">
         <h1>Josiah G.</h1>
-        <h2>Portfolio</h2>
+        <h2>Coder, Gamer, What's grass?</h2>
     </header>
 
-    <div class="content">
-        <div class="project">
-            <h3>Sigma Craft</h3>
-            <p>Sigma Craft is a project I developed for a games website that I am part of called Sigma Games 21. Below is an embedded view of the website where you can explore the project in detail.</p>
-            <iframe src="https://ironjosiah13600.github.io/sigmacraft/" title="Sigma Craft"></iframe>
-        </div>
+    <section class="intro">
+        <h2>About Me</h2>
+        <p>Hello, I'm Josiah. I have a burning passion for learning how to code and playing video games such as: Portal, Minecraft, and others alike. My favorite food is Chicken Alfredo, and my favorite color is sky blue. I also develop for a website that acts as an unblocked games website for school. Find the link for it down below in the Connections page.</p>
+    </section>
 
-        <div class="project">
-            <h3>Project Title 2</h3>
-            <p>Description of the second project. Provide details about the project, including its features and the role you played in its development.</p>
+    <section class="social-media">
+        <h3>Connections</h3>
+        <div class="social-buttons">
+            <a href="https://github.com/IronJosiah13600" target="_blank">
+                <img class="github-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+            </a>
+            <a href="https://steamcommunity.com/profiles/76561199171872881/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
+            </a>
+            <a href="https://www.sigmagames21.site" target="_blank">
+                <img class="sigma-logo" src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Sigma Games">
+            </a>
         </div>
+    </section>
 
-        <div class="project">
-            <h3>Project Title 3</h3>
-            <p>Description of the third project. Highlight key aspects of the project and its impact or results.</p>
-        </div>
-    </div>
+    <section class="my-stuff">
+        <a href="portfolio.html" class="back-button">Portfolio</a>
+    </section>
 
     <footer>
         <a href="index.html" class="back-button">Back to Home</a>
@@ -142,13 +161,11 @@
 
         const dots = [];
         const numDots = 100;
-        const maxConnections = 5;
-        const maxSpeed = 2.5; // Reduced speed by 50%
-        const accelerationFactor = 0.1; // Reduced acceleration by 50%
-        const repulsionRadius = 150; // Only dots within this radius are repelled
-        const decelerationTime = 2000; // Time in milliseconds before dots decelerate
-        const decelerationFactor = 0.98; // Rate at which dots decelerate
-
+        const maxSpeed = 1.25;
+        const accelerationFactor = 0.1;
+        const repulsionRadius = 150;
+        const decelerationTime = 2000;
+        const decelerationFactor = 0.98;
         let cursorX = width / 2;
         let cursorY = height / 2;
 
@@ -159,10 +176,10 @@
 
         window.addEventListener('resize', resizeCanvas);
 
-        canvas.addEventListener('mousemove', (event) => {
+        document.addEventListener('mousemove', (event) => {
             const rect = canvas.getBoundingClientRect();
-            cursorX = event.clientX - rect.left;
-            cursorY = event.clientY - rect.top;
+            cursorX = event.clientX - rect.left + window.scrollX; // Adjust for scroll
+            cursorY = event.clientY - rect.top + window.scrollY;  // Adjust for scroll
         });
 
         function Dot() {
@@ -185,14 +202,12 @@
                 this.vx += force * Math.cos(angle);
                 this.vy += force * Math.sin(angle);
 
-                // Limit the speed to maxSpeed
                 const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
                 if (speed > maxSpeed) {
                     this.vx = (this.vx / speed) * maxSpeed;
                     this.vy = (this.vy / speed) * maxSpeed;
                 }
 
-                // Set a timeout to decelerate after 2 seconds
                 clearTimeout(this.repulsionTimeout);
                 this.repulsionTimeout = setTimeout(() => {
                     this.vx *= decelerationFactor;
@@ -203,8 +218,10 @@
             this.x += this.vx;
             this.y += this.vy;
 
-            if (this.x > width || this.x < 0) this.vx *= -1;
-            if (this.y > height || this.y < 0) this.vy *= -1;
+            if (this.x > width) this.x = 0;
+            if (this.x < 0) this.x = width;
+            if (this.y > height) this.y = 0;
+            if (this.y < 0) this.y = height;
 
             this.connections = [];
         }
