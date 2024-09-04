@@ -12,7 +12,8 @@
             background-color: black;
             color: #fff;
             text-align: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         #backgroundCanvas {
@@ -74,11 +75,6 @@
             border-radius: 50%;
             overflow: hidden;
             position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .social-buttons a:hover {
-            transform: scale(1.2);
         }
 
         .social-buttons a img {
@@ -89,6 +85,11 @@
             border: 4px solid white;
             border-radius: 50%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .social-buttons a:hover img {
+            transform: scale(1.2);
         }
 
         .social-buttons a img.github-logo {
@@ -100,25 +101,24 @@
             background-color: transparent;
         }
 
-        .my-stuff {
-            margin-top: 40px;
+        .portfolio-section {
+            margin-top: 50px;
         }
 
-        .my-stuff a {
-            text-decoration: none;
-            color: black;
-            background-color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 18px;
+        .portfolio-button {
             display: inline-block;
-            margin-top: 10px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            font-size: 18px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s ease;
         }
 
-        .my-stuff a:hover {
+        .portfolio-button:hover {
             transform: scale(1.1);
-            background-color: #ddd;
         }
 
         footer {
@@ -127,6 +127,7 @@
             background-color: transparent;
             color: #fff;
         }
+
     </style>
 </head>
 <body>
@@ -136,7 +137,7 @@
     <header class="header">
         <img src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Josiah's Logo">
         <h1>Josiah G.</h1>
-        <h2>Coder, Gamer, Lot's of other stuff.</h2>
+        <h2>Coder, Gamer, What's grass?</h2>
     </header>
 
     <section class="intro">
@@ -147,22 +148,21 @@
     <section class="social-media">
         <h3>Connections</h3>
         <div class="social-buttons">
-            <a href="https://github.com/IronJosiah13600" target="_blank">
+            <a href="https://github.com/IronJosiah13600" target="_self">
                 <img class="github-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
             </a>
-            <a href="https://steamcommunity.com/profiles/76561199171872881/" target="_blank">
+            <a href="https://steamcommunity.com/profiles/76561199171872881/" target="_self">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
             </a>
-            <a href="https://www.sigmagames21.site" target="_blank">
+            <a href="https://www.sigmagames21.site" target="_self">
                 <img class="sigma-logo" src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Sigma Games">
             </a>
         </div>
     </section>
 
-    <section class="portfolio">
-        <h3>My Stuff</h3>
+    <section class="portfolio-section">
         <a href="portfolio.html" class="portfolio-button">Portfolio</a>
-    </section>    
+    </section>
 
     <footer>
         <p>&copy; 2024 Josiah G. All rights reserved.</p>
@@ -177,6 +177,10 @@
         const dots = [];
         const numDots = 100;
         const maxConnections = 5;
+        const maxSpeed = 5;
+        const accelerationFactor = 0.1;
+        let cursorX = width / 2;
+        let cursorY = height / 2;
 
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
@@ -185,15 +189,38 @@
 
         window.addEventListener('resize', resizeCanvas);
 
+        canvas.addEventListener('mousemove', (event) => {
+            cursorX = event.clientX;
+            cursorY = event.clientY;
+        });
+
         function Dot() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5; // Reduced speed
-            this.vy = (Math.random() - 0.5) * 0.5; // Reduced speed
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
             this.connections = [];
         }
 
         Dot.prototype.update = function() {
+            const dx = this.x - cursorX;
+            const dy = this.y - cursorY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 100) {
+                const angle = Math.atan2(dy, dx);
+                const force = (100 - dist) * accelerationFactor;
+                this.vx += force * Math.cos(angle);
+                this.vy += force * Math.sin(angle);
+
+                // Limit the speed to maxSpeed
+                const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                if (speed > maxSpeed) {
+                    this.vx = (this.vx / speed) * maxSpeed;
+                    this.vy = (this.vy / speed) * maxSpeed;
+                }
+            }
+
             this.x += this.vx;
             this.y += this.vy;
 
@@ -216,13 +243,13 @@
                 for (let j = i + 1; j < dots.length; j++) {
                     let dot2 = dots[j];
                     const dist = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
-                    const opacity = Math.max(0.1, 1 - (dist / 100)); // Fading effect based on distance
+                    const opacity = Math.max(0.1, 1 - (dist / 100));
                     if (dist < 100 && dot1.connections.length < maxConnections) {
                         ctx.beginPath();
                         ctx.moveTo(dot1.x, dot1.y);
                         ctx.lineTo(dot2.x, dot2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`; // Adjust opacity based on distance
-                        ctx.lineWidth = 1; // Thinner lines
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.lineWidth = 1;
                         ctx.stroke();
 
                         dot1.connections.push(dot2);
