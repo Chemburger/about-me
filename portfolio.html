@@ -146,6 +146,9 @@
         const maxSpeed = 2.5; // Reduced speed by 50%
         const accelerationFactor = 0.1; // Reduced acceleration by 50%
         const repulsionRadius = 150; // Only dots within this radius are repelled
+        const decelerationTime = 2000; // Time in milliseconds before dots decelerate
+        const decelerationFactor = 0.98; // Rate at which dots decelerate
+
         let cursorX = width / 2;
         let cursorY = height / 2;
 
@@ -168,6 +171,7 @@
             this.vx = (Math.random() - 0.5) * 0.5;
             this.vy = (Math.random() - 0.5) * 0.5;
             this.connections = [];
+            this.repulsionTimeout = null;
         }
 
         Dot.prototype.update = function() {
@@ -187,6 +191,13 @@
                     this.vx = (this.vx / speed) * maxSpeed;
                     this.vy = (this.vy / speed) * maxSpeed;
                 }
+
+                // Set a timeout to decelerate after 2 seconds
+                clearTimeout(this.repulsionTimeout);
+                this.repulsionTimeout = setTimeout(() => {
+                    this.vx *= decelerationFactor;
+                    this.vy *= decelerationFactor;
+                }, decelerationTime);
             }
 
             this.x += this.vx;
