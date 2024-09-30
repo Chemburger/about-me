@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josiah G - Personal Website</title>
+    <title>Photography - Josiah G</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +18,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;    
+            width: 100%;
             height: 100%;
             z-index: -1;
         }
@@ -28,79 +28,36 @@
             padding: 20px;
         }
 
-        .header img {
-            width: 100px;
-            border-radius: 50%;
-            margin-top: 10px;
-        }
-
         .header h1 {
-            margin: 10px 0 5px 0;
+            margin: 10px 0;
             font-size: 36px;
         }
 
-        .header h2 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .intro {
+        .photo-section {
             margin: 50px auto;
-            max-width: 600px;
+            max-width: 900px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
         }
 
-        .social-media {
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .photo-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
 
-        .social-media h3 {
-            margin: 0 0 10px 0;
-            font-size: 24px;
+        .photo-description {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #666;
+            border-radius: 8px;
+            color: #fff;
         }
 
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-        }
-
-        .social-buttons a {
-            text-decoration: none;
-            margin: 0 10px;
+        .back-button {
             display: inline-block;
-            border-radius: 50%;
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.3s;
-        }
-
-        .social-buttons a img {
-            width: 40px;
-            height: 40px;
-            vertical-align: middle;
-            filter: grayscale(100%);
-            border: 4px solid white;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .social-buttons a img.github-logo {
-            background-color: white;
-        }
-
-        .social-buttons a img.sigma-logo {
-            filter: none;
-            background-color: transparent;
-        }
-
-        .social-buttons a:hover {
-            transform: scale(1.1);
-        }
-
-        .portfolio-button, .photography-button {
-            display: inline-block;
+            margin-top: 30px;
             padding: 10px 20px;
             background-color: white;
             color: black;
@@ -109,82 +66,37 @@
             border: 2px solid white;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
-            margin: 0 10px;
         }
 
-        .portfolio-button:hover, .photography-button:hover {
+        .back-button:hover {
             background-color: black;
             color: white;
             transform: scale(1.1);
         }
-
-        .portfolio {
-            margin-top: 20px;
-        }
-
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: transparent;
-            color: #fff;
-        }
     </style>
 </head>
-<audio id="background-music" autoplay loop>
-    <source src="your-music-file.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
-
-<script>
-    // Set the background music volume to 30%
-    document.getElementById("background-music").volume = 0.3;
-</script>
-
 <body>
 
     <canvas id="backgroundCanvas"></canvas>
 
     <header class="header">
-        <img src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Josiah's Logo">
-        <h1>Josiah G.</h1>
-        <h2>Coder, Gamer.</h2>
+        <h1>Photography</h1>
     </header>
 
-    <section class="intro">
-        <h2>About Me</h2>
-        <p>Hello, I'm Josiah. I have a burning passion for learning how to code and playing video games such as: Portal, Minecraft, and others alike. My favorite food is Chicken Alfredo, and my favorite color is sky blue. I also develop for a website that acts as an unblocked games website for school. Find the link for it down below in the Connections page.</p>
-    </section>
-
-    <section class="social-media">
-        <h3>Connections</h3>
-        <div class="social-buttons">
-            <a href="https://github.com/IronJosiah13600" target="_self">
-                <img class="github-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
-            </a>
-            <a href="https://steamcommunity.com/profiles/76561199171872881/" target="_self">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam">
-            </a>
-            <a href="https://www.sigmagames21.site" target="_self">
-                <img class="sigma-logo" src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Sigma Games">
-            </a>
+    <section class="photo-section">
+        <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0145.JPG" alt="Long exposure night photo">
+        <div class="photo-description">
+            I took this photo at around 11pm when it was pitch dark, the image you see was taken over 30 seconds in order to achieve this effect.
         </div>
     </section>
 
-    <section class="portfolio">
-        <h3>My Stuff</h3>
-        <a href="portfolio.html" class="portfolio-button">Portfolio</a>
-        <a href="photography.html" class="photography-button">Photography</a>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Josiah G. All rights reserved.</p>
-    </footer>
+    <a href="index.html" class="back-button">Back to Home</a>
 
     <script>
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
-        let height = canvas.height = document.body.scrollHeight; // Adjusted to make the canvas height match the page height
+        let height = canvas.height = document.body.scrollHeight; // Adjust to the page height
 
         const dots = [];
         const numDots = 100;
