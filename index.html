@@ -201,36 +201,14 @@
     <footer>
         <p>&copy; 2024 Josiah G. All rights reserved.</p>
     </footer>
-    <!DOCTYPE html>
-    
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josiah G - Personal Website</title>
-    <style>
-        /* Add some styles to hide the iframe */
-        iframe#audio-player {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-            width: 0;
-            height: 0;
-            border: none;
-        }
-    </style>
-</head>
-<body>
-    <!-- Other content on your page -->
 
-    <!-- Embed the iframe -->
-    <iframe id="audio-player" src="audio.html" allow="autoplay"></iframe>
+    <audio id="background-music" loop>
+        <source src="lofi-study-112191.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <!-- Rest of your page content -->
-
-</body>
-</html>
-
+    <!-- Play Button Overlay -->
+    <div id="playButtonOverlay">
         <button id="playButton">Welcome to my website, Click to Continue</button>
     </div>
 
