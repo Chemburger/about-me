@@ -12,6 +12,7 @@
             background-color: black;
             color: #fff;
             text-align: center;
+            overflow-x: hidden;
         }
 
         #backgroundCanvas {
@@ -191,6 +192,71 @@
 
         // Show all photos by default
         filterPhotos('all');
+
+        // Background dots and lines animation
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let dots = [];
+        const dotCount = 100;
+        const dotSize = 2;  // Consistent size for all dots
+        const speed = 0.5;  // Consistent speed for all dots
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            dots = [];
+
+            for (let i = 0; i < dotCount; i++) {
+                dots.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    speedX: (Math.random() - 0.5) * speed,
+                    speedY: (Math.random() - 0.5) * speed
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+
+            dots.forEach(dot => {
+                // Draw dots with consistent size
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
+                ctx.fillStyle = '#fff';
+                ctx.fill();
+
+                // Move dots with consistent speed
+                dot.x += dot.speedX;
+                dot.y += dot.speedY;
+
+                // Boundary check
+                if (dot.x > width || dot.x < 0) dot.speedX *= -1;
+                if (dot.y > height || dot.y < 0) dot.speedY *= -1;
+
+                // Draw lines between nearby dots with varying opacity based on distance
+                dots.forEach(otherDot => {
+                    const distance = Math.hypot(dot.x - otherDot.x, dot.y - otherDot.y);
+                    if (distance < 100) {
+                        const opacity = 1 - distance / 100; // Brightness increases as dots get closer
+                        ctx.beginPath();
+                        ctx.moveTo(dot.x, dot.y);
+                        ctx.lineTo(otherDot.x, otherDot.y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+
+        init();
+        draw();
     </script>
 
     <a href="index.html" class="back-button">Back to Home</a>
