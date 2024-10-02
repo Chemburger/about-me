@@ -128,6 +128,37 @@
             background-color: transparent;
             color: #fff;
         }
+
+        /* Play Button Overlay */
+        #playButtonOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #playButton {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        #playButton:hover {
+            transform: scale(1.1);
+            background-color: black;
+            color: white;
+        }
     </style>
 </head>
 
@@ -176,12 +207,19 @@
         Your browser does not support the audio element.
     </audio>
 
+    <!-- Play Button Overlay -->
+    <div id="playButtonOverlay">
+        <button id="playButton">Welcome to my website, Click to Continue</button>
+    </div>
+
     <script>
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = document.body.scrollHeight;
         const audio = document.getElementById('background-music');
+        const playButton = document.getElementById('playButton');
+        const playButtonOverlay = document.getElementById('playButtonOverlay');
 
         const dots = [];
         const numDots = 100;
@@ -226,14 +264,13 @@
                     let dot2 = dots[j];
                     const dist = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
                     const opacity = Math.max(0.1, 1 - (dist / 100));
-                    if (dist < 100 && dot1.connections.length < maxConnections) {
+                    if (dist < 100 && dot1.connections.length < maxConnections && dot2.connections.length < maxConnections) {
                         ctx.beginPath();
                         ctx.moveTo(dot1.x, dot1.y);
                         ctx.lineTo(dot2.x, dot2.y);
                         ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                        ctx.lineWidth = 1;
+                        ctx.lineWidth = 0.5;
                         ctx.stroke();
-
                         dot1.connections.push(dot2);
                         dot2.connections.push(dot1);
                     }
@@ -241,35 +278,27 @@
             }
         }
 
+        for (let i = 0; i < numDots; i++) {
+            dots.push(new Dot());
+        }
+
         function animate() {
             ctx.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].update();
-                dots[i].draw();
-            }
-
+            dots.forEach(dot => {
+                dot.update();
+                dot.draw();
+            });
             connectDots();
-
             requestAnimationFrame(animate);
         }
 
-        function init() {
-            for (let i = 0; i < numDots; i++) {
-                dots.push(new Dot());
-            }
+        animate();
 
-            animate();
-
-            // Trigger audio after canvas animation starts
-            audio.play().then(() => {
-                console.log("Audio started successfully after canvas load.");
-            }).catch(error => {
-                console.log("Audio playback failed: " + error);
-            });
-        }
-
-        window.addEventListener('load', init);
+        // Handle audio play on user interaction
+        playButton.addEventListener('click', function() {
+            audio.play();
+            playButtonOverlay.style.display = 'none';
+        });
     </script>
 
 </body>
