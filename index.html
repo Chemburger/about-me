@@ -130,20 +130,6 @@
         }
     </style>
 </head>
-<audio id="background-music" loop>
-    <source src="lofi-study-112191.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
-
-<script>
-    document.body.addEventListener('click', function() {
-        const audio = document.getElementById('background-music');
-        if (audio.paused) {
-            audio.volume = 0.3;
-            audio.play();
-        }
-    }, { once: true });
-</script>
 
 <body>
 
@@ -185,11 +171,17 @@
         <p>&copy; 2024 Josiah G. All rights reserved.</p>
     </footer>
 
+    <audio id="background-music" loop>
+        <source src="lofi-study-112191.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
-        let height = canvas.height = document.body.scrollHeight; // Adjusted to make the canvas height match the page height
+        let height = canvas.height = document.body.scrollHeight;
+        const audio = document.getElementById('background-music');
 
         const dots = [];
         const numDots = 100;
@@ -197,7 +189,7 @@
 
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
-            height = canvas.height = document.body.scrollHeight; // Adjust canvas height on window resize
+            height = canvas.height = document.body.scrollHeight;
         }
 
         window.addEventListener('resize', resizeCanvas);
@@ -266,10 +258,18 @@
             for (let i = 0; i < numDots; i++) {
                 dots.push(new Dot());
             }
+
             animate();
+
+            // Trigger audio after canvas animation starts
+            audio.play().then(() => {
+                console.log("Audio started successfully after canvas load.");
+            }).catch(error => {
+                console.log("Audio playback failed: " + error);
+            });
         }
 
-        init();
+        window.addEventListener('load', init);
     </script>
 
 </body>
