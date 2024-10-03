@@ -33,7 +33,62 @@
             font-size: 36px;
         }
 
-        .portfolio-button, .photography-button {
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .filter-buttons button {
+            padding: 10px 20px;
+            border: none;
+            background-color: white;
+            color: black;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .filter-buttons button:hover {
+            transform: scale(1.1);
+        }
+
+        .filter-buttons button.active {
+            background-color: black;
+            color: white;
+        }
+
+        .image-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .image-grid .image-item {
+            width: calc(33.333% - 40px);
+            max-width: 300px;
+            border: 4px solid white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .image-grid .image-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .image-grid .image-item p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .portfolio-button, .photography-button, .music-button {
             display: inline-block;
             padding: 10px 20px;
             background-color: white;
@@ -46,7 +101,7 @@
             margin: 0 10px;
         }
 
-        .portfolio-button:hover, .photography-button:hover {
+        .portfolio-button:hover, .photography-button:hover, .music-button:hover {
             background-color: black;
             color: white;
             transform: scale(1.1);
@@ -58,6 +113,23 @@
             background-color: transparent;
             color: #fff;
         }
+
+        @media (max-width: 768px) {
+            .image-grid .image-item {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .image-grid .image-item {
+                width: 100%;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -68,14 +140,33 @@
         <h1>Photography</h1>
     </header>
 
-    <section class="content">
-        <!-- Your photography content goes here -->
+    <section class="filter-buttons">
+        <button class="active" onclick="filterImages('all')">All</button>
+        <button onclick="filterImages('nature')">Nature</button>
+        <button onclick="filterImages('night')">Night</button>
+        <button onclick="filterImages('animals')">Animals</button>
+        <button onclick="filterImages('astrophotography')">Astrophotography</button>
+        <button onclick="filterImages('cityscapes')">Cityscapes</button>
+        <button onclick="filterImages('macro')">Macro</button>
+        <button onclick="filterImages('abstract')">Abstract</button>
+        <button onclick="filterImages('aviation')">Aviation</button>
+    </section>
+
+    <section class="image-grid">
+        <div class="image-item" data-category="night">
+            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0145.JPG" alt="Night Photography">
+            <p>I took this photo at around 11pm when it was pitch dark, the image you see was taken over 30 seconds in order to achieve this effect.</p>
+        </div>
+        <div class="image-item" data-category="aviation">
+            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0169.JPG" alt="Aviation Photography">
+            <p>A helicopter that I thought was worth mentioning.</p>
+        </div>
     </section>
 
     <section class="portfolio">
         <h3>My Stuff</h3>
-        <a href="portfolio.html" class="portfolio-button">Portfolio</a>
         <a href="index.html" class="photography-button">Home</a>
+        <button class="music-button" id="musicButton" onclick="toggleMusic()">Play Music</button>
     </section>
 
     <footer>
@@ -167,6 +258,39 @@
         }
 
         init();
+
+        // Music handling
+        const audio = new Audio('your-audio-file.mp3');  // Replace 'your-audio-file.mp3' with the path to your audio file.
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                document.getElementById('musicButton').innerText = "Play Music";
+            } else {
+                audio.play();
+                document.getElementById('musicButton').innerText = "Pause Music";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function filterImages(category) {
+            const items = document.querySelectorAll('.image-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            const buttons = document.querySelectorAll('.filter-buttons button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.querySelector(`[onclick="filterImages('${category}')"]`).classList.add('active');
+        }
     </script>
 
 </body>
