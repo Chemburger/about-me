@@ -12,6 +12,7 @@
             background-color: black;
             color: #fff;
             text-align: center;
+            overflow-x: hidden;
         }
 
         #backgroundCanvas {
@@ -28,13 +29,68 @@
             padding: 20px;
         }
 
+        .header img {
+            width: 100px;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+
         .header h1 {
-            margin: 10px 0;
+            margin: 10px 0 5px 0;
             font-size: 36px;
         }
 
-        .portfolio-button, .photography-button {
+        .header h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .page-title {
+            margin-top: 20px;
+            font-size: 28px;
+            color: white;
+        }
+
+        .projects {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .project {
+            background-color: #333;
+            border-radius: 8px;
+            margin: 15px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .project:hover {
+            transform: scale(1.05);
+        }
+
+        .project img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid #666;
+        }
+
+        .project h3 {
+            margin-top: 15px;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .project p {
+            color: #ccc;
+        }
+
+        .back-button {
             display: inline-block;
+            margin-top: 30px;
             padding: 10px 20px;
             background-color: white;
             color: black;
@@ -43,20 +99,12 @@
             border: 2px solid white;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
-            margin: 0 10px;
         }
 
-        .portfolio-button:hover, .photography-button:hover {
+        .back-button:hover {
             background-color: black;
             color: white;
             transform: scale(1.1);
-        }
-
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: transparent;
-            color: #fff;
         }
     </style>
 </head>
@@ -65,108 +113,101 @@
     <canvas id="backgroundCanvas"></canvas>
 
     <header class="header">
-        <h1>Portfolio</h1>
+        <img src="https://file.garden/ZqNqGVYDUWTCD89e/sigma_logo-removebg%20(1).png" alt="Josiah's Logo">
+        <h1>Josiah G.</h1>
+        <h2>Portfolio</h2>
     </header>
 
-    <section class="content">
-        <!-- Your portfolio content goes here -->
-    </section>
+    <div class="page-title">
+        <p>Check out some of my projects below</p>
+    </div>
 
-    <section class="portfolio">
-        <h3>My Stuff</h3>
-        <a href="photography.html" class="portfolio-button">Photography</a>
-        <a href="index.html" class="photography-button">Home</a>
-    </section>
+    <div class="projects">
+        <!-- Example Project -->
+        <div class="project">
+            <img src="https://via.placeholder.com/300" alt="Project 1">
+            <h3>Project Title 1</h3>
+            <p>Project Description 1</p>
+        </div>
 
-    <footer>
-        <p>&copy; 2024 Josiah G. All rights reserved.</p>
-    </footer>
+        <!-- Another Example Project -->
+        <div class="project">
+            <img src="https://via.placeholder.com/300" alt="Project 2">
+            <h3>Project Title 2</h3>
+            <p>Project Description 2</p>
+        </div>
+
+        <!-- Additional Projects Here -->
+
+    </div>
+
+    <a href="index.html" class="back-button">Back to Home</a>
 
     <script>
+        // Background dots and lines animation
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = document.body.scrollHeight;
 
-        const dots = [];
-        const numDots = 100;
-        const maxConnections = 5;
-
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = document.body.scrollHeight;
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-
-        function Dot() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.connections = [];
-        }
-
-        Dot.prototype.update = function() {
-            this.x += this.vx;
-            this.y += this.vy;
-
-            if (this.x > width || this.x < 0) this.vx *= -1;
-            if (this.y > height || this.y < 0) this.vy *= -1;
-
-            this.connections = [];
-        }
-
-        Dot.prototype.draw = function() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
-            ctx.fillStyle = 'white';
-            ctx.fill();
-        }
-
-        function connectDots() {
-            for (let i = 0; i < dots.length; i++) {
-                let dot1 = dots[i];
-                for (let j = i + 1; j < dots.length; j++) {
-                    let dot2 = dots[j];
-                    const dist = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
-                    const opacity = Math.max(0.1, 1 - (dist / 100));
-                    if (dist < 100 && dot1.connections.length < maxConnections) {
-                        ctx.beginPath();
-                        ctx.moveTo(dot1.x, dot1.y);
-                        ctx.lineTo(dot2.x, dot2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-
-                        dot1.connections.push(dot2);
-                        dot2.connections.push(dot1);
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].update();
-                dots[i].draw();
-            }
-
-            connectDots();
-
-            requestAnimationFrame(animate);
-        }
+        let width, height;
+        let dots = [];
+        const dotCount = 100;
+        const dotSize = 2;  // Consistent size for all dots
+        const speed = 0.5;  // Consistent speed for all dots
 
         function init() {
-            for (let i = 0; i < numDots; i++) {
-                dots.push(new Dot());
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            dots = [];
+
+            for (let i = 0; i < dotCount; i++) {
+                dots.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    speedX: (Math.random() - 0.5) * speed,
+                    speedY: (Math.random() - 0.5) * speed
+                });
             }
-            animate();
         }
 
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+
+            dots.forEach(dot => {
+                // Draw dots with consistent size
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
+                ctx.fillStyle = '#fff';
+                ctx.fill();
+
+                // Move dots with consistent speed
+                dot.x += dot.speedX;
+                dot.y += dot.speedY;
+
+                // Boundary check
+                if (dot.x > width || dot.x < 0) dot.speedX *= -1;
+                if (dot.y > height || dot.y < 0) dot.speedY *= -1;
+
+                // Draw lines between nearby dots with varying opacity based on distance
+                dots.forEach(otherDot => {
+                    const distance = Math.hypot(dot.x - otherDot.x, dot.y - otherDot.y);
+                    if (distance < 100) {
+                        const opacity = 1 - distance / 100; // Brightness increases as dots get closer
+                        ctx.beginPath();
+                        ctx.moveTo(dot.x, dot.y);
+                        ctx.lineTo(otherDot.x, otherDot.y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+
         init();
+        draw();
     </script>
 
 </body>
