@@ -12,7 +12,6 @@
             background-color: black;
             color: #fff;
             text-align: center;
-            overflow-x: hidden;
         }
 
         #backgroundCanvas {
@@ -29,76 +28,13 @@
             padding: 20px;
         }
 
-        .header img {
-            width: 100px;
-            border-radius: 50%;
-            margin-top: 10px;
-        }
-
         .header h1 {
-            margin: 10px 0 5px 0;
+            margin: 10px 0;
             font-size: 36px;
         }
 
-        .header h2 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .page-title {
-            margin-top: 20px;
-            font-size: 28px;
-            color: white;
-        }
-
-        .filter-buttons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .filter-buttons button {
-            background-color: #555;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .filter-buttons button:hover {
-            background-color: #777;
-        }
-
-        .photo-section {
-            margin: 50px auto;
-            max-width: 900px;
-            padding: 20px;
-            background-color: #333;
-            border-radius: 8px;
-        }
-
-        .photo-section img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 2px solid #666;
-        }
-
-        .photo-description {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #666;
-            border-radius: 8px;
-            color: #fff;
-        }
-
-        .back-button {
+        .portfolio-button, .photography-button {
             display: inline-block;
-            margin-top: 30px;
             padding: 10px 20px;
             background-color: white;
             color: black;
@@ -107,44 +43,21 @@
             border: 2px solid white;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            margin: 0 10px;
         }
 
-        .back-button:hover {
+        .portfolio-button:hover, .photography-button:hover {
             background-color: black;
             color: white;
             transform: scale(1.1);
         }
-        
-        #playButtonOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
 
-        #playButton {
-            padding: 20px 40px;
-            font-size: 24px;
-            background-color: white;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: transparent;
+            color: #fff;
         }
-
-        #playButton:hover {
-            transform: scale(1.1);
-            background-color: black;
-            color: white;
-        }
-        
     </style>
 </head>
 <body>
@@ -152,154 +65,109 @@
     <canvas id="backgroundCanvas"></canvas>
 
     <header class="header">
-        <h1>Josiah G.</h1>
-        <h2>Photography</h2>
+        <h1>Photography</h1>
     </header>
 
-    <div class="filter-buttons">
-        <button onclick="filterPhotos('all')">Show All</button>
-        <button onclick="filterPhotos('nature')">Nature</button>
-        <button onclick="filterPhotos('night')">Night</button>
-        <button onclick="filterPhotos('animals')">Animals</button>
-        <button onclick="filterPhotos('astrophotography')">Astrophotography</button>
-        <button onclick="filterPhotos('aviation')">Aviation</button>
-        <button onclick="filterPhotos('abstract')">Abstract</button>
-        <button onclick="filterPhotos('macro')">Macro</button>
-    </div>
-
-    <section id="photo-gallery">
-        <!-- Night Category Photo -->
-        <div class="photo-section" data-category="night">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0145.JPG" alt="Long exposure night photo">
-            <div class="photo-description">
-                I took this photo at around 11pm when it was pitch dark, the image you see was taken over 30 seconds in order to achieve this effect.
-            </div>
-        </div>
-
-        <!-- Aviation Category Photo -->
-        <div class="photo-section" data-category="aviation">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0169.JPG" alt="A helicopter that I thought was worth mentioning.">
-            <div class="photo-description">
-                A helicopter that I thought was worth mentioning.
-            </div>
-        </div>
-
-        <!-- Add more photos here -->
-         <div class="photo-section" data-category="animals">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0103.JPG" alt="A horse at a farm">
-            <div class="photo-description">
-                A horse at a farm
-            </div>
-        </div>
-
-        <div class="photo-section" data-category="animals">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0085.JPG" alt="Doggie">
-            <div class="photo-description">
-                Doggie
-            </div>
-        </div>
-
-        <div class="photo-section" data-category="macro">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0033.JPG" alt="Closeup of a stagg guitar amp">
-            <div class="photo-description">
-                Closeup of a stagg guitar amp
-            </div>
-        </div>
-
+    <section class="content">
+        <!-- Your photography content goes here -->
     </section>
 
-    <audio id="background-music" loop>
-        <source src="lofi-study-112191.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <section class="portfolio">
+        <h3>My Stuff</h3>
+        <a href="portfolio.html" class="portfolio-button">Portfolio</a>
+        <a href="index.html" class="photography-button">Home</a>
+    </section>
 
-    <!-- Play Button Overlay -->
-    <div id="playButtonOverlay">
-        <button id="playButton">Welcome to my website, Click to Continue</button>
-    </div>
+    <footer>
+        <p>&copy; 2024 Josiah G. All rights reserved.</p>
+    </footer>
 
     <script>
-        function filterPhotos(category) {
-            const sections = document.querySelectorAll('.photo-section');
-            sections.forEach(section => {
-                if (category === 'all' || section.getAttribute('data-category') === category) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
-        }
-
-        // Show all photos by default
-        filterPhotos('all');
-
-        // Background dots and lines animation
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = document.body.scrollHeight;
 
-        let width, height;
-        let dots = [];
-        const dotCount = 100;
-        const dotSize = 2;  // Consistent size for all dots
-        const speed = 0.5;  // Consistent speed for all dots
+        const dots = [];
+        const numDots = 100;
+        const maxConnections = 5;
 
-        function init() {
+        function resizeCanvas() {
             width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            dots = [];
+            height = canvas.height = document.body.scrollHeight;
+        }
 
-            for (let i = 0; i < dotCount; i++) {
-                dots.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    speedX: (Math.random() - 0.5) * speed,
-                    speedY: (Math.random() - 0.5) * speed
-                });
+        window.addEventListener('resize', resizeCanvas);
+
+        function Dot() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.connections = [];
+        }
+
+        Dot.prototype.update = function() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x > width || this.x < 0) this.vx *= -1;
+            if (this.y > height || this.y < 0) this.vy *= -1;
+
+            this.connections = [];
+        }
+
+        Dot.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+        }
+
+        function connectDots() {
+            for (let i = 0; i < dots.length; i++) {
+                let dot1 = dots[i];
+                for (let j = i + 1; j < dots.length; j++) {
+                    let dot2 = dots[j];
+                    const dist = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
+                    const opacity = Math.max(0.1, 1 - (dist / 100));
+                    if (dist < 100 && dot1.connections.length < maxConnections) {
+                        ctx.beginPath();
+                        ctx.moveTo(dot1.x, dot1.y);
+                        ctx.lineTo(dot2.x, dot2.y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+
+                        dot1.connections.push(dot2);
+                        dot2.connections.push(dot1);
+                    }
+                }
             }
         }
 
-        function draw() {
+        function animate() {
             ctx.clearRect(0, 0, width, height);
 
-            dots.forEach(dot => {
-                // Draw dots with consistent size
-                ctx.beginPath();
-                ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
-                ctx.fillStyle = '#fff';
-                ctx.fill();
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].update();
+                dots[i].draw();
+            }
 
-                // Move dots with consistent speed
-                dot.x += dot.speedX;
-                dot.y += dot.speedY;
+            connectDots();
 
-                // Boundary check
-                if (dot.x > width || dot.x < 0) dot.speedX *= -1;
-                if (dot.y > height || dot.y < 0) dot.speedY *= -1;
-
-                // Draw lines between nearby dots with varying opacity based on distance
-                dots.forEach(otherDot => {
-                    const distance = Math.hypot(dot.x - otherDot.x, dot.y - otherDot.y);
-                    if (distance < 100) {
-                        const opacity = 1 - distance / 100; // Brightness increases as dots get closer
-                        ctx.beginPath();
-                        ctx.moveTo(dot.x, dot.y);
-                        ctx.lineTo(otherDot.x, otherDot.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                        ctx.stroke();
-                    }
-                });
-            });
-
-            requestAnimationFrame(draw);
+            requestAnimationFrame(animate);
         }
 
-        window.addEventListener('resize', init);
+        function init() {
+            for (let i = 0; i < numDots; i++) {
+                dots.push(new Dot());
+            }
+            animate();
+        }
 
         init();
-        draw();
     </script>
-
-    <a href="index.html" class="back-button">Back to Homie</a>
 
 </body>
 </html>
