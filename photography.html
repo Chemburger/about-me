@@ -136,8 +136,10 @@
     <canvas id="backgroundCanvas"></canvas>
 
     <header class="header">
-        <h1>Photography</h1>
-        <!-- Contact information added here -->
+        <h1>Josiah G</h1> <!-- Restored to Josiah G -->
+        <h2>Photography</h2> <!-- Photography Title -->
+
+        <!-- Contact information updated here -->
         <p class="contact-info">To purchase photos, contact me at <a href="mailto:josiahgphotograph@gmail.com">josiahgphotograph@gmail.com</a></p>
     </header>
 
@@ -264,8 +266,8 @@
         let width, height;
         let dots = [];
         const dotCount = 100;
-        const dotSize = 2;  // Size of the dots
-        const lineWidth = 0.2;  // Thickness of the connecting lines
+        const dotSize = 2;
+        const lineWidth = 0.2;
 
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
@@ -311,7 +313,7 @@
                     if (dist < 100) {
                         ctx.beginPath();
                         ctx.moveTo(dots[i].x, dots[i].y);
-                        ctx.lineTo(dots[j].x, dots[j].y);
+                        ctx.lineTo(dots[j].x, dots[j.y]);
                         ctx.strokeStyle = 'rgba(255, 255, 255,' + (1 - dist / 100) + ')';
                         ctx.lineWidth = lineWidth;
                         ctx.stroke();
@@ -328,7 +330,6 @@
 
         window.addEventListener('resize', resizeCanvas);
 
-        // Initialize everything
         resizeCanvas();
         initDots();
         animate();
