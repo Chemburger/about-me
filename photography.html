@@ -51,6 +51,12 @@
             color: white;
         }
 
+        .contact-info {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #fff;
+        }
+
         .filter-buttons {
             margin-top: 30px;
             display: flex;
@@ -114,6 +120,15 @@
             color: white;
             transform: scale(1.1);
         }
+
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -121,8 +136,9 @@
     <canvas id="backgroundCanvas"></canvas>
 
     <header class="header">
-        <h1>Josiah G.</h1>
-        <h2>Photography</h2>
+        <h1>Photography</h1>
+        <!-- Contact information added here -->
+        <p class="contact-info">To purchase photos, contact me at <a href="mailto:josiahgphotograph@gmail.com">josiahgphotograph@gmail.com</a></p>
     </header>
 
     <div class="filter-buttons">
@@ -153,7 +169,7 @@
             </div>
         </div>
 
-        <!-- Animals Photos -->
+        <!-- Add more photos here -->
         <div class="photo-section" data-category="animals">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0103.JPG" alt="A horse at a farm">
             <div class="photo-description">
@@ -168,7 +184,6 @@
             </div>
         </div>
 
-        <!-- Macro Photo -->
         <div class="photo-section" data-category="macro">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0033.JPG" alt="Closeup of a stagg guitar amp">
             <div class="photo-description">
@@ -176,7 +191,6 @@
             </div>
         </div>
 
-        <!-- Football Photos -->
         <div class="photo-section" data-category="football">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled.jpeg" alt="Football">
             <div class="photo-description">
@@ -250,51 +264,81 @@
         let width, height;
         let dots = [];
         const dotCount = 100;
-        const dotSize = 2;  // Consistent size for all dots
-        const speed = 0.5;  // Consistent speed for all dots
+        const dotSize = 2;  // Size of the dots
+        const lineWidth = 0.2;  // Thickness of the connecting lines
 
-        function init() {
+        function resizeCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            dots = [];
+        }
 
+        function initDots() {
+            dots = [];
             for (let i = 0; i < dotCount; i++) {
                 dots.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * speed,
-                    vy: (Math.random() - 0.5) * speed
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
                 });
             }
         }
 
         function updateDots() {
-            ctx.clearRect(0, 0, width, height);
-            for (let dot of dots) {
+            dots.forEach(dot => {
                 dot.x += dot.vx;
                 dot.y += dot.vy;
 
                 if (dot.x < 0 || dot.x > width) dot.vx *= -1;
                 if (dot.y < 0 || dot.y > height) dot.vy *= -1;
+            });
+        }
 
+        function drawDots() {
+            ctx.clearRect(0, 0, width, height);
+
+            dots.forEach(dot => {
                 ctx.beginPath();
                 ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
-                ctx.fillStyle = 'white';
+                ctx.fillStyle = '#ffffff';
                 ctx.fill();
+            });
+
+            // Draw lines between close dots
+            for (let i = 0; i < dots.length; i++) {
+                for (let j = i + 1; j < dots.length; j++) {
+                    const dist = Math.hypot(dots[i].x - dots[j].x, dots[i].y - dots[j].y);
+                    if (dist < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(dots[i].x, dots[i].y);
+                        ctx.lineTo(dots[j].x, dots[j].y);
+                        ctx.strokeStyle = 'rgba(255, 255, 255,' + (1 - dist / 100) + ')';
+                        ctx.lineWidth = lineWidth;
+                        ctx.stroke();
+                    }
+                }
             }
         }
 
         function animate() {
             updateDots();
+            drawDots();
             requestAnimationFrame(animate);
         }
 
-        init();
-        animate();
+        window.addEventListener('resize', resizeCanvas);
 
-        window.addEventListener('resize', init);
+        // Initialize everything
+        resizeCanvas();
+        initDots();
+        animate();
     </script>
 
-    <a href="index.html" class="back-button">Back to Home</a>
+    <!-- Back to Home Button -->
+    <a class="back-button" href="index.html">Back to Home</a>
+
+    <!-- Music Button -->
+    <a class="back-button" href="#">Music</a>
+
 </body>
 </html>
