@@ -153,8 +153,8 @@
             </div>
         </div>
 
-        <!-- Add more photos here -->
-         <div class="photo-section" data-category="animals">
+        <!-- Animals Photos -->
+        <div class="photo-section" data-category="animals">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0103.JPG" alt="A horse at a farm">
             <div class="photo-description">
                 A horse at a farm
@@ -168,6 +168,7 @@
             </div>
         </div>
 
+        <!-- Macro Photo -->
         <div class="photo-section" data-category="macro">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0033.JPG" alt="Closeup of a stagg guitar amp">
             <div class="photo-description">
@@ -175,49 +176,50 @@
             </div>
         </div>
 
-        <div class="photo-section" data-category="football"></div>
+        <!-- Football Photos -->
+        <div class="photo-section" data-category="football">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled.jpeg" alt="Football">
             <div class="photo-description">
-                Player looks up to catch the football which is approching.
+                Player looks up to catch the football which is approaching.
             </div>
         </div>
 
-        <div class="photo-section" data-category="football"></div>
+        <div class="photo-section" data-category="football">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(3).jpeg" alt="Football">
             <div class="photo-description">
                 Player catches the ball.
             </div>
         </div>
 
-        <div class="photo-section" data-category="football"></div>
+        <div class="photo-section" data-category="football">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(1).jpeg" alt="Football">
             <div class="photo-description">
                 Football is about to be thrown.
             </div>
         </div>
 
-        <div class="photo-section" data-category="football"></div>
+        <div class="photo-section" data-category="football">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(2).jpeg" alt="Football">
             <div class="photo-description">
                 A play starts.
             </div>
         </div>
 
-        <div class="photo-section" data-category="football"></div>
+        <div class="photo-section" data-category="football">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(6).jpeg" alt="Football">
             <div class="photo-description">
                 After a tough game all of the players exchange handshakes.
             </div>
         </div>
 
-        <div class="photo-section" data-category="football"></div>
+        <div class="photo-section" data-category="football">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(5).jpeg" alt="Football">
             <div class="photo-description">
                 Players lined up ready for the play to start.
             </div>
         </div>
 
-        <div class="photo-section" data-category="football"></div>
+        <div class="photo-section" data-category="football">
             <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(4).jpeg" alt="Football">
             <div class="photo-description">
                 Many players fight over the football.
@@ -260,54 +262,39 @@
                 dots.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    speedX: (Math.random() - 0.5) * speed,
-                    speedY: (Math.random() - 0.5) * speed
+                    vx: (Math.random() - 0.5) * speed,
+                    vy: (Math.random() - 0.5) * speed
                 });
             }
         }
 
-        function draw() {
+        function updateDots() {
             ctx.clearRect(0, 0, width, height);
+            for (let dot of dots) {
+                dot.x += dot.vx;
+                dot.y += dot.vy;
 
-            dots.forEach(dot => {
-                // Draw dots with consistent size
+                if (dot.x < 0 || dot.x > width) dot.vx *= -1;
+                if (dot.y < 0 || dot.y > height) dot.vy *= -1;
+
                 ctx.beginPath();
                 ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
-                ctx.fillStyle = '#fff';
+                ctx.fillStyle = 'white';
                 ctx.fill();
-
-                // Move dots with consistent speed
-                dot.x += dot.speedX;
-                dot.y += dot.speedY;
-
-                // Boundary check
-                if (dot.x > width || dot.x < 0) dot.speedX *= -1;
-                if (dot.y > height || dot.y < 0) dot.speedY *= -1;
-
-                // Draw lines between nearby dots with varying opacity based on distance
-                dots.forEach(otherDot => {
-                    const distance = Math.hypot(dot.x - otherDot.x, dot.y - otherDot.y);
-                    if (distance < 100) {
-                        const opacity = 1 - distance / 100; // Brightness increases as dots get closer
-                        ctx.beginPath();
-                        ctx.moveTo(dot.x, dot.y);
-                        ctx.lineTo(otherDot.x, otherDot.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                        ctx.stroke();
-                    }
-                });
-            });
-
-            requestAnimationFrame(draw);
+            }
         }
 
-        window.addEventListener('resize', init);
+        function animate() {
+            updateDots();
+            requestAnimationFrame(animate);
+        }
 
         init();
-        draw();
+        animate();
+
+        window.addEventListener('resize', init);
     </script>
 
     <a href="index.html" class="back-button">Back to Home</a>
-
 </body>
 </html>
