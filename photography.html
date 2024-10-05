@@ -313,7 +313,7 @@
                     if (dist < 100) {
                         ctx.beginPath();
                         ctx.moveTo(dots[i].x, dots[i].y);
-                        ctx.lineTo(dots[j].x, dots[j.y]);
+                        ctx.lineTo(dots[j].x, dots[j].y);
                         ctx.strokeStyle = 'rgba(255, 255, 255,' + (1 - dist / 100) + ')';
                         ctx.lineWidth = lineWidth;
                         ctx.stroke();
@@ -337,9 +337,6 @@
 
     <!-- Back to Home Button -->
     <a class="back-button" href="index.html">Back to Home</a>
-
-    <!-- Music Button -->
-    <a class="back-button" href="#">Music</a>
 
 </body>
 </html>
