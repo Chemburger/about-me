@@ -100,6 +100,7 @@
             background-color: #666;
             border-radius: 8px;
             color: #fff;
+            display: none; /* Hidden by default */
         }
 
         .back-button {
@@ -136,9 +137,7 @@
     <canvas id="backgroundCanvas"></canvas>
 
     <header class="header">
-        <img src="https://file.garden/ZvnxDRqmhjeIfvm6/IMG_5420.jpeg" alt="Website logo here">
-
-        <!-- Contact information updated here -->
+        <h1>Photography</h1>
         <p class="contact-info">To purchase photos, contact me at <a href="mailto:josiahgphotograph@gmail.com">josiahgphotograph@gmail.com</a></p>
     </header>
 
@@ -154,93 +153,102 @@
     </div>
 
     <section id="photo-gallery">
-        <!-- Night Category Photo -->
-        <div class="photo-section" data-category="night">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0145.JPG" alt="Long exposure night photo">
-            <div class="photo-description">
-                I took this photo at around 11pm when it was pitch dark, the image you see was taken over 30 seconds in order to achieve this effect.
+            <!-- Night Category Photo -->
+            <div class="photo-section" data-category="night">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0145.JPG" alt="Long exposure night photo">
+                <div class="photo-description">
+                    I took this photo at around 11pm when it was pitch dark, the image you see was taken over 30 seconds in order to achieve this effect.
+                </div>
             </div>
-        </div>
-
-        <!-- Aviation Category Photo -->
-        <div class="photo-section" data-category="aviation">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0169.JPG" alt="A helicopter that I thought was worth mentioning.">
-            <div class="photo-description">
-                A helicopter that I thought was worth mentioning.
+        
+            <!-- Aviation Category Photo -->
+            <div class="photo-section" data-category="aviation">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0169.JPG" alt="A helicopter that I thought was worth mentioning.">
+                <div class="photo-description">
+                    A helicopter that I thought was worth mentioning.
+                </div>
             </div>
-        </div>
-
-        <!-- Add more photos here -->
-        <div class="photo-section" data-category="animals">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0103.JPG" alt="A horse at a farm">
-            <div class="photo-description">
-                A horse at a farm
+        
+            <!-- Animals Category Photos -->
+            <div class="photo-section" data-category="animals">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0103.JPG" alt="A horse at a farm">
+                <div class="photo-description">
+                    A horse at a farm
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="animals">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0085.JPG" alt="Doggie">
-            <div class="photo-description">
-                Doggie
+        
+            <div class="photo-section" data-category="animals">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0085.JPG" alt="Doggie">
+                <div class="photo-description">
+                    Doggie
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="macro">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0033.JPG" alt="Closeup of a stagg guitar amp">
-            <div class="photo-description">
-                Closeup of a stagg guitar amp
+        
+            <!-- Macro Category Photo -->
+            <div class="photo-section" data-category="macro">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/DSC_0033.JPG" alt="Closeup of a stagg guitar amp">
+                <div class="photo-description">
+                    Closeup of a stagg guitar amp
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="football">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled.jpeg" alt="Football">
-            <div class="photo-description">
-                Player looks up to catch the football which is approaching.
+        
+            <!-- Football Category Photos -->
+            <div class="photo-section" data-category="football">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled.jpeg" alt="Football">
+                <div class="photo-description">
+                    Player looks up to catch the football which is approaching.
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="football">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(3).jpeg" alt="Football">
-            <div class="photo-description">
-                Player catches the ball.
+        
+            <div class="photo-section" data-category="football">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(3).jpeg" alt="Football">
+                <div class="photo-description">
+                    Player catches the ball.
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="football">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(1).jpeg" alt="Football">
-            <div class="photo-description">
-                Football is about to be thrown.
+        
+            <div class="photo-section" data-category="football">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(1).jpeg" alt="Football">
+                <div class="photo-description">
+                    Football is about to be thrown.
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="football">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(2).jpeg" alt="Football">
-            <div class="photo-description">
-                A play starts.
+        
+            <div class="photo-section" data-category="football">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(2).jpeg" alt="Football">
+                <div class="photo-description">
+                    A play starts.
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="football">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(6).jpeg" alt="Football">
-            <div class="photo-description">
-                After a tough game all of the players exchange handshakes.
+        
+            <div class="photo-section" data-category="football">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(6).jpeg" alt="Football">
+                <div class="photo-description">
+                    After a tough game all of the players exchange handshakes.
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="football">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(5).jpeg" alt="Football">
-            <div class="photo-description">
-                Players lined up ready for the play to start.
+        
+            <div class="photo-section" data-category="football">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(5).jpeg" alt="Football">
+                <div class="photo-description">
+                    Players lined up ready for the play to start.
+                </div>
             </div>
-        </div>
-
-        <div class="photo-section" data-category="football">
-            <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(4).jpeg" alt="Football">
-            <div class="photo-description">
-                Many players fight over the football.
+        
+            <div class="photo-section" data-category="football">
+                <img src="https://file.garden/ZvnxDRqmhjeIfvm6/Untitled%20(4).jpeg" alt="Football">
+                <div class="photo-description">
+                    Many players fight over the football.
+                </div>
             </div>
-        </div>
 
+            <div class="photo-section" data-category="football">
+                <img src="" alt="Football">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Add additional photo sections with descriptions as necessary -->
     </section>
 
     <script>
@@ -258,7 +266,14 @@
         // Show all photos by default
         filterPhotos('all');
 
-        // Background dots and lines animation
+        // Show photo description only if it has content
+        document.querySelectorAll('.photo-description').forEach(description => {
+            if (description.textContent.trim()) {
+                description.style.display = 'block';
+            }
+        });
+
+        // Background animation (dots and lines)
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -289,7 +304,6 @@
             dots.forEach(dot => {
                 dot.x += dot.vx;
                 dot.y += dot.vy;
-
                 if (dot.x < 0 || dot.x > width) dot.vx *= -1;
                 if (dot.y < 0 || dot.y > height) dot.vy *= -1;
             });
@@ -297,15 +311,12 @@
 
         function drawDots() {
             ctx.clearRect(0, 0, width, height);
-
             dots.forEach(dot => {
                 ctx.beginPath();
                 ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
                 ctx.fillStyle = '#ffffff';
                 ctx.fill();
             });
-
-            // Draw lines between close dots
             for (let i = 0; i < dots.length; i++) {
                 for (let j = i + 1; j < dots.length; j++) {
                     const dist = Math.hypot(dots[i].x - dots[j].x, dots[i].y - dots[j].y);
@@ -313,7 +324,7 @@
                         ctx.beginPath();
                         ctx.moveTo(dots[i].x, dots[i].y);
                         ctx.lineTo(dots[j].x, dots[j].y);
-                        ctx.strokeStyle = 'rgba(255, 255, 255,' + (1 - dist / 100) + ')';
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - dist / 100})`;
                         ctx.lineWidth = lineWidth;
                         ctx.stroke();
                     }
@@ -328,14 +339,11 @@
         }
 
         window.addEventListener('resize', resizeCanvas);
-
         resizeCanvas();
         initDots();
         animate();
     </script>
 
-    <!-- Back to Home Button -->
-    <a class="back-button" href="index.html">Back to Home</a>
-
+    <a href="index.html" class="back-button">Back to Home</a>
 </body>
 </html>
